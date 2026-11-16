@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Activa — Activa tus sentidos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes: Inter, Special Elite & Courier Prime (Máquina de escribir), Orbitron (LED/Radio) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;800&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #07080b;
+            --bg-card: rgba(15, 17, 23, 0.72);
+            --tape-brown: #362925;
+            --tape-dark: #221916;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-deep);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(239, 68, 68, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 50% 25%, #12151c 0%, #07080b 70%, #040507 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Tipografías especializadas */
+        .font-typewriter {
+            font-family: 'Special Elite', 'Courier Prime', monospace;
+        }
+
+        .font-mono-tech {
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .font-radio-brand {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Textura sutil de escritorio de estudio */
+        .studio-surface {
+            background-image:
+                radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 0),
+                radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 0);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+        }
+
+        /* Superficies vidrio esmerilado oscuro */
+        .glass-dark {
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        /* =========================================================
+           SKIN EXACTO DEL CASSETTE TRANSPARENTE REEL-TO-REEL
+           ========================================================= */
+        .cassette-shell {
+            aspect-ratio: 1.58 / 1;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.56) 0%,
+                rgba(235, 240, 246, 0.36) 35%,
+                rgba(215, 222, 232, 0.28) 65%,
+                rgba(255, 255, 255, 0.48) 100%
+            );
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.72);
+            box-shadow:
+                0 32px 70px -12px rgba(0, 0, 0, 0.92),
+                0 0 40px -10px rgba(239, 68, 68, 0.14),
+                0 0 0 1px rgba(15, 23, 42, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.85),
+                inset 0 -3px 8px rgba(100, 116, 139, 0.45),
+                inset 3px 0 6px rgba(255, 255, 255, 0.5),
+                inset -3px 0 6px rgba(148, 163, 184, 0.5);
+            user-select: none;
+        }
+
+        .cassette-gloss {
+            background: linear-gradient(
+                118deg,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0.28) 38%,
+                rgba(255, 255, 255, 0.06) 44%,
+                rgba(255, 255, 255, 0) 60%
+            );
+            pointer-events: none;
+        }
+
+        /* Efecto de tinta de máquina de escribir sobre etiqueta de papel/acrílico */
+        .typewriter-strip {
+            background: linear-gradient(180deg, rgba(252, 250, 242, 0.92) 0%, rgba(238, 234, 222, 0.94) 100%);
+            box-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(180, 175, 162, 0.65);
+        }
+
+        .typewriter-ink {
+            color: #1c1917;
+            text-shadow: 0.4px 0.4px 0px rgba(28, 25, 23, 0.35);
+            letter-spacing: 0.09em;
+        }
+
+        /* Cursor parpadeante de máquina de escribir */
+        .typing-cursor::after {
+            content: '|';
+            animation: blinkCursor 0.85s infinite;
+            color: #b91c1c;
+            font-weight: bold;
+            margin-left: 2px;
+        }
+
+        @keyframes blinkCursor {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Botones táctiles estilo deck de cassette vintage */
+        .deck-btn {
+            background: linear-gradient(180deg, #2a2f3a 0%, #191c23 100%);
+            border: 1px solid #3c4250;
+            box-shadow:
+                0 4px 0 #0d0f13,
+                0 6px 14px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            transition: all 0.08s ease;
+        }
+
+        .deck-btn:hover {
+            background: linear-gradient(180deg, #353b48 0%, #20242d 100%);
+        }
+
+        .deck-btn:active, .deck-btn.active {
+            transform: translateY(3px);
+            box-shadow:
+                0 1px 0 #0d0f13,
+                0 2px 5px rgba(0, 0, 0, 0.7),
+                inset 0 2px 4px rgba(0, 0, 0, 0.45);
+        }
+
+        .deck-btn-play.active {
+            background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+            border-color: #f87171;
+            box-shadow:
+                0 1px 0 #450a0a,
+                0 0 20px rgba(239, 68, 68, 0.5),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        /* LED indicador pulsante */
+        @keyframes pulseLive {
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px #ef4444, 0 0 22px rgba(239, 68, 68, 0.65); }
+            50% { opacity: 0.42; box-shadow: 0 0 4px #ef4444; }
+        }
+
+        .led-live-on {
+            background-color: #ef4444;
+            animation: pulseLive 1.4s infinite ease-in-out;
+        }
+
+        .led-live-off {
+            background-color: #475569;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Control deslizante de volumen personalizado */
+        input[type="range"].studio-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #12141a;
+            height: 6px;
+            border-radius: 999px;
+            border: 1px solid #2b313e;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.85);
+        }
+
+        input[type="range"].studio-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #f8fafc, #94a3b8);
+            border: 2px solid #0f172a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+            cursor: pointer;
+        }
+
+        input[type="range"].studio-slider::-moz-range-thumb {
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #f8fafc, #94a3b8);
+            border: 2px solid #0f172a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+            cursor: pointer;
+        }
+
+        /* Scrollbar oscuro elegante para el panel de administración */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #272b36;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f4656;
+        }
+    </style>
+</head>
+<body class="studio-surface flex flex-col min-h-screen selection:bg-red-500/30 selection:text-white">
+
+    <!-- =================================================================== -->
+    <!-- 1. BARRA DE NAVEGACIÓN MINIMALISTA DARK                             -->
+    <!-- =================================================================== -->
+    <nav class="sticky top-0 z-30 w-full border-b border-white/[0.06] bg-[#07080b]/85 backdrop-blur-xl">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <!-- Identidad / Logo Principal (Editable desde panel) -->
+            <a href="#" class="flex items-center gap-3 group min-w-0">
+                <div id="headerLogoContainer" class="flex items-center justify-center shrink-0">
+                    <!-- Emblema vectorial por defecto o imagen personalizada -->
+                    <div id="defaultLogoEmblem" class="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500/20 to-amber-500/10 border border-red-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.18)] group-hover:border-red-500/60 transition">
+                        <svg class="w-5 h-5 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+                            <path stroke-linecap="round" d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
+                        </svg>
+                    </div>
+                    <img id="customLogoImg" src="" alt="Logo Radio Activa" class="hidden object-contain rounded-lg" style="height: 38px;">
+                </div>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2">
+                        <span id="navStationName" class="font-radio-brand text-sm sm:text-base font-extrabold tracking-widest text-white uppercase truncate">
+                            Radio Activa
+                        </span>
+                        <span class="hidden sm:inline-block text-[10px] font-mono-tech px-2 py-0.5 rounded-full bg-white/[0.04] text-slate-400 border border-white/[0.08]">
+                            ON AIR
+                        </span>
+                    </div>
+                    <p id="navSloganSub" class="text-[11px] font-typewriter text-slate-400 truncate">Activa tus sentidos</p>
+                </div>
+            </a>
+
+            <!-- Enlaces rápidos + Botón discreto Personalizar Web -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <div class="hidden md:flex items-center gap-5 text-xs font-medium text-slate-400">
+                    <a href="#reproductor" class="hover:text-white transition">En Vivo</a>
+                    <a href="#pedidos" class="hover:text-white transition">Pedidos</a>
+                    <a href="#programacion" class="hover:text-white transition">Programación</a>
+                    <a href="#alianzas" class="hover:text-white transition">Logos</a>
+                    <a href="#contacto" class="hover:text-white transition">Contacto</a>
+                </div>
+
+                <a id="navWhatsappQuick" href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer"
+                   class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 text-emerald-400 text-xs font-medium transition">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                    <span>Cabina</span>
+                </a>
+
+                <button id="openAdminBtn" type="button"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.09] border border-white/[0.1] text-slate-300 hover:text-white text-xs font-medium transition cursor-pointer"
+                        title="Personalizar logos, teléfonos, WhatsApp y señal">
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                    </svg>
+                    <span>Personalizar Web</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =================================================================== -->
+    <!-- CONTENIDO PRINCIPAL                                                 -->
+    <!-- =================================================================== -->
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10 flex flex-col gap-14">
+
+        <!-- =============================================================== -->
+        <!-- 2. HERO & REPRODUCTOR CASSETTE CENTRAL (TAMAÑO ADECUADO)        -->
+        <!-- =============================================================== -->
+        <section id="reproductor" class="w-full max-w-[520px] mx-auto flex flex-col items-center gap-4">
+
+            <!-- Barra de Telemetría Superior del Deck -->
+            <div class="w-full flex flex-wrap items-center justify-between gap-2.5 px-3.5 py-2 rounded-2xl glass-dark shadow-lg">
+                <div class="flex items-center gap-2.5">
+                    <span id="liveLed" class="w-2.5 h-2.5 rounded-full led-live-off transition-all duration-300"></span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="deckStationTitle" class="font-radio-brand text-xs font-extrabold tracking-wider text-white uppercase">
+                                Radio Activa
+                            </span>
+                            <span class="text-[9px] font-mono-tech px-1.5 py-0.5 rounded-full bg-red-500/15 text-red-400 border border-red-500/30">
+                                FM / STREAM
+                            </span>
+                        </div>
+                        <p id="statusText" class="text-[10px] font-mono-tech text-slate-400">LISTO PARA REPRODUCIR</p>
+                    </div>
+                </div>
+
+                <!-- Medidor VU LEDs en tiempo real -->
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1.5 bg-black/60 px-2.5 py-1 rounded-xl border border-white/[0.07]" title="Nivel de señal de audio">
+                        <span class="text-[9px] font-mono-tech text-slate-400 uppercase tracking-widest">VU</span>
+                        <div id="vuMeter" class="flex items-end gap-1 h-3.5">
+                            <span class="vu-bar w-1 h-1.5 rounded-sm bg-emerald-500/30 transition-all duration-75"></span>
+                            <span class="vu-bar w-1 h-2 rounded-sm bg-emerald-500/30 transition-all duration-75"></span>
+                            <span class="vu-bar w-1 h-2.5 rounded-sm bg-emerald-500/30 transition-all duration-75"></span>
+                            <span class="vu-bar w-1 h-3 rounded-sm bg-emerald-500/30 transition-all duration-75"></span>
+                            <span class="vu-bar w-1 h-3 rounded-sm bg-amber-400/30 transition-all duration-75"></span>
+                            <span class="vu-bar w-1 h-3.5 rounded-sm bg-amber-400/30 transition-all duration-75"></span>
+                            <span class="vu-bar w-1 h-3.5 rounded-sm bg-red-500/30 transition-all duration-75"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASSETTE TRANSPARENTE REEL-TO-REEL (TAMAÑO COMPACTO Y NÍTIDO) -->
+            <div aria-label="Cassette Radio Activa" class="w-full relative select-none">
+                <div class="cassette-shell w-full rounded-[20px] sm:rounded-[24px] relative overflow-hidden p-2">
+            <!-- CASSETTE TRANSPARENTE REEL-TO-REEL (SKIN EXACTO) -->
+            <div aria-label="Cassette Radio Activa" class="w-full relative select-none">
+                <div class="cassette-shell w-full rounded-[22px] sm:rounded-[28px] relative overflow-hidden p-2 sm:p-3">
+
+                    <!-- SVG Técnico de Alta Precisión -->
+                    <svg id="cassetteSvg" viewBox="0 0 1000 632" class="w-full h-full block drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="polyEdge" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+                                <stop offset="50%" stop-color="#cbd5e1" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.75"/>
+                            </linearGradient>
+
+                            <linearGradient id="reelMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f8fafc"/>
+                                <stop offset="45%" stop-color="#e2e8f0"/>
+                                <stop offset="100%" stop-color="#cbd5e1"/>
+                            </linearGradient>
+
+                            <radialGradient id="tapeWindGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="72%" stop-color="#291e1b"/>
+                                <stop offset="86%" stop-color="#3c2d28"/>
+                                <stop offset="94%" stop-color="#231916"/>
+                                <stop offset="100%" stop-color="#4a3832"/>
+                            </radialGradient>
+
+                            <radialGradient id="screwHead" cx="40%" cy="35%" r="60%">
+                                <stop offset="0%" stop-color="#52525b"/>
+                                <stop offset="60%" stop-color="#27272a"/>
+                                <stop offset="100%" stop-color="#09090b"/>
+                            </radialGradient>
+
+                            <mask id="reelCutoutMask">
+                                <rect x="-220" y="-220" width="440" height="440" fill="white"/>
+                                <circle cx="0" cy="0" r="54" fill="black"/>
+                                <g fill="black">
+                                    <path d="M -38,-78 L 38,-78 L 54,-148 C 20,-160 -20,-160 -54,-148 Z" transform="rotate(-38)"/>
+                                    <path d="M -38,-78 L 38,-78 L 54,-148 C 20,-160 -20,-160 -54,-148 Z" transform="rotate(82)"/>
+                                    <path d="M -38,-78 L 38,-78 L 54,-148 C 20,-160 -20,-160 -54,-148 Z" transform="rotate(202)"/>
+                                </g>
+                            </mask>
+
+                            <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+                                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.28"/>
+                            </filter>
+                        </defs>
+
+                        <!-- 1. MARCO INTERIOR DE POLICARBONATO Y CAVIDAD DE CARRETES -->
+                        <rect x="14" y="14" width="972" height="604" rx="22" fill="rgba(241, 245, 249, 0.25)" stroke="url(#polyEdge)" stroke-width="3"/>
+
+                        <path d="M 55,62 
+                                 L 175,62 L 195,148 L 805,148 L 825,62 L 945,62 
+                                 C 962,62 972,74 972,92 
+                                 L 972,515 
+                                 C 972,530 960,540 945,540 
+                                 L 805,540 L 785,498 L 215,498 L 195,540 L 55,540 
+                                 C 38,540 28,530 28,515 
+                                 L 28,92 
+                                 C 28,74 38,62 55,62 Z" 
+                              fill="rgba(255, 255, 255, 0.24)" 
+                              stroke="rgba(148, 163, 184, 0.55)" 
+                              stroke-width="2"/>
+
+                        <path d="M 180,22 L 820,22 L 802,144 L 198,144 Z" 
+                              fill="rgba(255, 255, 255, 0.32)" 
+                              stroke="rgba(255, 255, 255, 0.75)" 
+                              stroke-width="2"/>
+
+                        <rect x="435" y="34" width="130" height="36" rx="4" fill="rgba(203, 213, 225, 0.45)" stroke="rgba(148, 163, 184, 0.6)" stroke-width="1.5"/>
+                        <rect x="472" y="36" width="56" height="14" rx="2" fill="#475569" opacity="0.75"/>
+                        <line x1="415" y1="88" x2="585" y2="88" stroke="rgba(100, 116, 139, 0.5)" stroke-width="3" stroke-linecap="round"/>
+
+                        <path d="M 760,152 Q 925,165 935,345" fill="none" stroke="rgba(148, 163, 184, 0.45)" stroke-width="3"/>
+                        <path d="M 740,162 Q 895,180 905,355" fill="none" stroke="rgba(255, 255, 255, 0.65)" stroke-width="2"/>
+
+                        <!-- 2. CINTA MAGNÉTICA ENHEBRADA -->
+                        <g id="tapePathLayer" opacity="0.9">
+                            <line x1="295" y1="165" x2="705" y2="152" stroke="#3b2c27" stroke-width="2.5" opacity="0.45"/>
+                            <path d="M 142,350 Q 95,485 130,545 L 870,545 Q 915,475 895,335" 
+                                  fill="none" stroke="#362925" stroke-width="4.5" stroke-linejoin="round"/>
+                            <path d="M 240,545 L 760,545" stroke="#6d544c" stroke-width="1.5"/>
+                        </g>
+
+                        <!-- Rodillos guía inferiores -->
+                        <g transform="translate(115, 545)">
+                            <circle r="19" fill="rgba(226, 232, 240, 0.85)" stroke="#94a3b8" stroke-width="2"/>
+                            <circle r="8" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+                        </g>
+                        <g transform="translate(885, 545)">
+                            <circle r="19" fill="rgba(226, 232, 240, 0.85)" stroke="#94a3b8" stroke-width="2"/>
+                            <circle r="8" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+                        </g>
+
+                        <!-- 3. TAMBOR IZQUIERDO -->
+                        <g transform="translate(295, 342)" filter="url(#softShadow)">
+                            <circle id="leftTapePack" r="184" fill="#3a2c27" stroke="#231916" stroke-width="2"/>
+                            <g id="leftReel">
+                                <circle r="180" fill="url(#reelMetal)" stroke="#cbd5e1" stroke-width="2" mask="url(#reelCutoutMask)"/>
+                                <circle r="60" fill="none" stroke="#94a3b8" stroke-width="3"/>
+                                <circle r="53" fill="rgba(30, 41, 59, 0.12)" stroke="#ffffff" stroke-width="2"/>
+
+                                <circle cx="0" cy="-76" r="6.5" fill="#475569"/>
+                                <circle cx="65.8" cy="38" r="6.5" fill="#475569"/>
+                                <circle cx="-65.8" cy="38" r="6.5" fill="#475569"/>
+
+                                <g fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="middle" opacity="0.65">
+                                    <text x="0" y="-122" font-size="23" letter-spacing="1.5">OPEN</text>
+                                    <text x="0" y="-103" font-size="14" letter-spacing="1">CASETTE</text>
+                                    <g transform="rotate(118)">
+                                        <text x="0" y="-134" font-size="13" letter-spacing="0.8">AT-50</text>
+                                        <text x="0" y="-118" font-size="13" letter-spacing="0.6">BIAS/HIGH</text>
+                                        <text x="0" y="-102" font-size="13" letter-spacing="0.6">EQ/70µs</text>
+                                    </g>
+                                </g>
+
+                                <g fill="#1e293b">
+                                    <circle r="44" fill="none" stroke="#334155" stroke-width="5"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(0)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(60)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(120)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(180)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(240)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(300)"/>
+                                </g>
+                            </g>
+                        </g>
+
+                        <!-- 4. TAMBOR DERECHO -->
+                        <g transform="translate(705, 342)" filter="url(#softShadow)">
+                            <circle id="rightTapePack" r="206" fill="url(#tapeWindGrad)" stroke="#1c1412" stroke-width="2.5"/>
+                            <g id="rightReel">
+                                <circle r="180" fill="url(#reelMetal)" stroke="#cbd5e1" stroke-width="2" mask="url(#reelCutoutMask)"/>
+                                <circle r="60" fill="none" stroke="#94a3b8" stroke-width="3"/>
+                                <circle r="53" fill="rgba(30, 41, 59, 0.12)" stroke="#ffffff" stroke-width="2"/>
+
+                                <circle cx="0" cy="-76" r="6.5" fill="#475569"/>
+                                <circle cx="65.8" cy="38" r="6.5" fill="#475569"/>
+                                <circle cx="-65.8" cy="38" r="6.5" fill="#475569"/>
+
+                                <g fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="middle" opacity="0.72">
+                                    <g transform="rotate(-90)">
+                                        <text x="0" y="-122" font-size="23" letter-spacing="1.5">OPEN</text>
+                                        <text x="0" y="-103" font-size="14" letter-spacing="1">CASETTE</text>
+                                    </g>
+                                    <g transform="rotate(28)">
+                                        <text x="0" y="-134" font-size="13" letter-spacing="0.8">AT-50</text>
+                                        <text x="0" y="-118" font-size="13" letter-spacing="0.6">BIAS/HIGH</text>
+                                        <text x="0" y="-102" font-size="13" letter-spacing="0.6">EQ/70µs</text>
+                                    </g>
+                                </g>
+
+                                <g fill="#1e293b">
+                                    <circle r="44" fill="none" stroke="#334155" stroke-width="5"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(20)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(80)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(140)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(200)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(260)"/>
+                                    <rect x="-4" y="-44" width="8" height="12" rx="1.5" transform="rotate(320)"/>
+                                </g>
+                            </g>
+                        </g>
+
+                        <!-- 5. PUENTE TRAPEZOIDAL INFERIOR Y CABEZAL MAGNÉTICO -->
+                        <g>
+                            <path d="M 185,618 L 222,494 L 778,494 L 815,618 Z" 
+                                  fill="rgba(226, 232, 240, 0.68)" 
+                                  stroke="rgba(255, 255, 255, 0.85)" 
+                                  stroke-width="2.5"/>
+                            <rect x="468" y="572" width="64" height="18" rx="2" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+                            <rect x="486" y="566" width="28" height="8" rx="1" fill="#b45309"/>
+                            <circle cx="332" cy="575" r="14" fill="rgba(15, 23, 42, 0.25)" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="668" cy="575" r="14" fill="rgba(15, 23, 42, 0.25)" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="395" cy="586" r="9" fill="rgba(15, 23, 42, 0.35)" stroke="#cbd5e1" stroke-width="1.5"/>
+                            <circle cx="605" cy="586" r="9" fill="rgba(15, 23, 42, 0.35)" stroke="#cbd5e1" stroke-width="1.5"/>
+                            <circle cx="500" cy="532" r="20" fill="none" stroke="rgba(148, 163, 184, 0.55)" stroke-width="1.5"/>
+                            <text x="500" y="540" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="22" fill="rgba(148, 163, 184, 0.55)">A</text>
+                        </g>
+
+                        <!-- 6. LOS 5 TORNILLOS PHILLIPS NEGROS -->
+                        <g transform="translate(42, 42)">
+                            <circle r="21" fill="rgba(255,255,255,0.45)" stroke="#94a3b8" stroke-width="1.5"/>
+                            <circle r="15" fill="url(#screwHead)"/>
+                            <path d="M -8,0 L 8,0 M 0,-8 L 0,8" stroke="#09090b" stroke-width="3.2" stroke-linecap="round"/>
+                        </g>
+                        <g transform="translate(958, 42)">
+                            <circle r="21" fill="rgba(255,255,255,0.45)" stroke="#94a3b8" stroke-width="1.5"/>
+                            <circle r="15" fill="url(#screwHead)"/>
+                            <path d="M -8,0 L 8,0 M 0,-8 L 0,8" stroke="#09090b" stroke-width="3.2" stroke-linecap="round"/>
+                        </g>
+                        <g transform="translate(36, 586)">
+                            <circle r="21" fill="rgba(255,255,255,0.45)" stroke="#94a3b8" stroke-width="1.5"/>
+                            <circle r="15" fill="url(#screwHead)"/>
+                            <path d="M -8,0 L 8,0 M 0,-8 L 0,8" stroke="#09090b" stroke-width="3.2" stroke-linecap="round"/>
+                        </g>
+                        <g transform="translate(964, 586)">
+                            <circle r="21" fill="rgba(255,255,255,0.45)" stroke="#94a3b8" stroke-width="1.5"/>
+                            <circle r="15" fill="url(#screwHead)"/>
+                            <path d="M -8,0 L 8,0 M 0,-8 L 0,8" stroke="#09090b" stroke-width="3.2" stroke-linecap="round"/>
+                        </g>
+                        <g transform="translate(500, 174)">
+                            <circle r="20" fill="rgba(255,255,255,0.55)" stroke="#94a3b8" stroke-width="1.5"/>
+                            <circle r="14" fill="url(#screwHead)"/>
+                            <path d="M -7.5,0 L 7.5,0 M 0,-7.5 L 0,7.5" stroke="#09090b" stroke-width="3" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+
+                    <!-- SUPERPOSICIÓN DE MARCA SUPERIOR: "RADIO ACTIVA" -->
+                    <div class="absolute top-[4.2%] left-1/2 -translate-x-1/2 w-[56%] flex flex-col items-center pointer-events-none">
+                        <div class="px-3 py-1 rounded-lg bg-slate-950/85 border border-white/40 shadow-md backdrop-blur-md flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]"></span>
+                            <span id="cassetteBrandText" class="font-radio-brand text-xs sm:text-sm font-extrabold tracking-[0.16em] text-white uppercase drop-shadow truncate">
+                                Radio Activa
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ETIQUETA INFERIOR CON LETRAS DE MÁQUINA DE ESCRIBIR: "Activa tus sentidos" -->
+                    <div class="absolute bottom-[4.8%] left-1/2 -translate-x-1/2 w-[54%] flex justify-center pointer-events-none">
+                        <div class="typewriter-strip w-full py-1 px-3 rounded-md text-center transform -rotate-[0.35deg]">
+                            <p id="typewriterSlogan" class="font-typewriter typewriter-ink typing-cursor text-[11px] sm:text-xs font-bold tracking-wider truncate">
+                                Activa tus sentidos
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Reflejo plástico realista -->
+                    <div class="cassette-gloss absolute inset-0 rounded-[20px] sm:rounded-[24px]"></div>
+                </div>
+            </div>
+
+            <!-- CONSOLA DE CONTROLES MECÁNICOS DEL DECK (COMPACTA) -->
+            <div aria-label="Controles de reproducción" class="w-full glass-dark rounded-2xl p-3.5 shadow-2xl flex flex-col gap-3">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <!-- Botonera mecánica -->
+                    <div class="flex items-center gap-2">
+                        <button id="playPauseBtn" type="button" class="deck-btn deck-btn-play px-4 py-2.5 rounded-xl flex items-center gap-2 text-white font-semibold text-xs cursor-pointer" title="Reproducir / Pausar Radio Activa">
+                            <svg id="iconPlay" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg id="iconPause" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                            <span id="playBtnLabel">PLAY</span>
+                        </button>
+
+                        <button id="stopBtn" type="button" class="deck-btn px-3 py-2.5 rounded-xl flex items-center gap-1.5 text-slate-200 font-semibold text-xs cursor-pointer" title="Detener reproducción">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                                <path d="M6 6h12v12H6z"/>
+                            </svg>
+                            <span>STOP</span>
+                        </button>
+
+                        <button id="retypeBtn" type="button" class="deck-btn px-2.5 py-2.5 rounded-xl flex items-center gap-1 text-amber-300 font-mono-tech text-xs cursor-pointer" title="Volver a teclear lema">
+                            <span>⌨️</span>
+                        </button>
+                    </div>
+
+                    <!-- Control de Volumen -->
+                    <div class="flex items-center gap-2.5 flex-1 min-w-[145px] max-w-[210px] bg-black/50 px-3 py-2 rounded-xl border border-white/[0.06]">
+                        <button id="muteBtn" type="button" class="text-slate-300 hover:text-white transition cursor-pointer" title="Silenciar / Activar sonido">
+                            <svg id="volIconHigh" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/>
+                            </svg>
+                            <svg id="volIconMute" class="w-4 h-4 hidden text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6"/>
+                            </svg>
+                        </button>
+                        <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.85" class="studio-slider w-full" aria-label="Volumen">
+                        <span id="volumeLabel" class="text-[11px] font-mono-tech text-slate-400 w-8 text-right">85%</span>
+                    </div>
+                </div>
+
+                <!-- Caja de mensajes discretos (sin alert) -->
+                <div id="toastBox" class="hidden text-xs font-mono-tech px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-200"></div>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 3. SECCIÓN: PEDIDOS MUSICALES EN VIVO                           -->
+        <!-- =============================================================== -->
+        <section id="pedidos" class="w-full flex flex-col gap-5">
+            <div class="flex items-center justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <div>
+                    <p class="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-red-400">Interactivo · Cabina</p>
+                    <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Pedidos Musicales</h2>
+                </div>
+                <span class="text-[11px] font-mono-tech text-slate-400 hidden sm:inline">Tu música suena en Radio Activa</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <!-- Formulario de Pedido (6 columnas) -->
+                <form id="songRequestForm" class="lg:col-span-6 glass-dark rounded-2xl p-5 flex flex-col gap-3.5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-mono-tech text-slate-400 mb-1">Tu Nombre *</label>
+                            <input id="reqListenerName" type="text" required class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-xs text-white" placeholder="Ej. Carlos Mendoza">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-mono-tech text-slate-400 mb-1">Artista / Banda *</label>
+                            <input id="reqArtistName" type="text" required class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-xs text-white" placeholder="Ej. Soda Stereo">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-mono-tech text-slate-400 mb-1">Canción Solicitada *</label>
+                        <input id="reqSongTitle" type="text" required class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-xs text-white" placeholder="Ej. De Música Ligera">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-mono-tech text-slate-400 mb-1">Dedicatoria o Saludo (Opcional)</label>
+                        <textarea id="reqDedication" rows="2" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-xs text-white" placeholder="Para toda la gente que sintoniza desde el trabajo..."></textarea>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                        <button type="submit" class="flex-1 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-xs transition cursor-pointer">
+                            Publicar en Muro
+                        </button>
+                        <button id="sendReqWhatsappBtn" type="button" class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                            <span>Enviar a WhatsApp</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Muro de Últimos Pedidos (6 columnas) -->
+                <div class="lg:col-span-6 glass-dark rounded-2xl p-5 flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-mono-tech uppercase tracking-wider text-slate-300">Últimos Pedidos en Cabina</h3>
+                        <span id="requestsCountBadge" class="text-[10px] font-mono-tech px-2 py-0.5 rounded-full bg-white/[0.05] text-slate-400">0 pedidos</span>
+                    </div>
+                    <div id="songRequestsWall" class="space-y-2.5 max-h-[260px] overflow-y-auto pr-1">
+                        <!-- Renderizado dinámico -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 4. SECCIÓN: PROGRAMACIÓN DE LA RADIO                            -->
+        <!-- =============================================================== -->
+        <section id="programacion" class="w-full flex flex-col gap-5">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <div>
+                    <p class="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-amber-400">Parrilla Horaria</p>
+                    <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Programación de la Radio</h2>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <!-- Filtros por día -->
+                    <div class="inline-flex p-1 rounded-xl bg-black/60 border border-white/[0.08] text-xs">
+                        <button type="button" data-day="lv" class="schedule-day-btn px-3 py-1.5 rounded-lg bg-red-600 text-white font-medium transition cursor-pointer">Lun - Vie</button>
+                        <button type="button" data-day="sab" class="schedule-day-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Sábados</button>
+                        <button type="button" data-day="dom" class="schedule-day-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Domingos</button>
+                    </div>
+                    <button type="button" data-open-tab="programacion" class="open-admin-tab hidden sm:inline-block text-xs font-mono-tech px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] text-slate-400 hover:text-white transition cursor-pointer">
+                        + Editar Parrilla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid de Programas -->
+            <div id="scheduleGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Se renderiza dinámicamente desde JS -->
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 5. SECCIÓN: LOGOS & ALIANZAS EN TAMAÑO MEDIANO (EDITABLE)       -->
+        <!-- =============================================================== -->
+        <section id="alianzas" class="w-full flex flex-col gap-5">
+            <div class="flex items-center justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <div>
+                    <p class="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-red-400">Identidad & Marcas</p>
+                    <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Logos, Programas & Alianzas</h2>
+                </div>
+                <button type="button" data-open-tab="logos" class="open-admin-tab text-xs font-mono-tech px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.09] border border-white/[0.1] text-slate-300 hover:text-white transition cursor-pointer">
+                    + Añadir / Gestionar Logos
+                </button>
+            </div>
+
+            <!-- Grid dinámico de logos en tamaño mediano -->
+            <div id="partnerLogosGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Se renderiza dinámicamente desde JS -->
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 6. SECCIÓN: CABINA EN VIVO & CONTACTO DIRECTO WHATSAPP          -->
+        <!-- =============================================================== -->
+        <section id="contacto" class="w-full flex flex-col gap-5">
+            <div class="flex items-center justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <div>
+                    <p class="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-amber-400">Participación & Pauta</p>
+                    <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Cabina en Vivo & Contacto Directo</h2>
+                </div>
+                <button type="button" data-open-tab="telefonos" class="open-admin-tab text-xs font-mono-tech px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] text-slate-400 hover:text-white transition cursor-pointer">
+                    + Editar Números
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <!-- Tarjeta Principal de WhatsApp Directo (5 columnas) -->
+                <div class="lg:col-span-5 glass-dark rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-5 relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none"></div>
+                    <div class="flex flex-col gap-2.5">
+                        <div class="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[11px] font-mono-tech">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            WHATSAPP DIRECTO CABINA
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Contáctanos al instante</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            Envía notas de voz, saludos al aire o consulta por espacios publicitarios directamente con nuestro equipo.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <div class="bg-black/40 border border-white/[0.06] rounded-xl p-3">
+                            <span class="block text-[10px] font-mono-tech uppercase tracking-wider text-slate-500 mb-1">Línea Principal WhatsApp</span>
+                            <p id="mainWhatsappDisplay" class="font-mono-tech text-sm sm:text-base font-bold text-white">+591 70000000</p>
+                        </div>
+
+                        <a id="mainWhatsappCardBtn" href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer"
+                           class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm flex items-center justify-center gap-2.5 shadow-[0_8px_25px_-6px_rgba(16,185,129,0.55)] transition">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                            <span>Escribir al WhatsApp Ahora</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lista Dinámica de Números de Celular / Líneas (7 columnas) -->
+                <div id="phoneLinesContainer" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5 content-start">
+                    <!-- Se renderiza dinámicamente desde JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- 5. FOOTER MINIMALISTA DARK                                          -->
+    <!-- =================================================================== -->
+    <footer class="w-full border-t border-white/[0.06] bg-black/40 mt-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500/80"></span>
+                <span id="footerStationName" class="font-semibold text-slate-300">Radio Activa</span>
+                <span>—</span>
+                <span id="footerSlogan" class="font-typewriter text-slate-400">"Activa tus sentidos"</span>
+            </div>
+            <p class="font-mono-tech text-[11px]">Señal Digital HD · Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- =================================================================== -->
+    <!-- 6. BOTÓN FLOTANTE MINIMALISTA DE WHATSAPP                           -->
+    <!-- =================================================================== -->
+    <a id="floatingWhatsappBtn" href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp"
+       title="Chatear con Radio Activa por WhatsApp"
+       class="fixed bottom-5 right-5 z-40 w-13 h-13 p-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_10px_30px_rgba(16,185,129,0.45)] border border-emerald-400/30 flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+    </a>
+
+    <!-- =================================================================== -->
+    <!-- 7. PANEL LATERAL DE ADMINISTRACIÓN / PERSONALIZACIÓN EN VIVO (DRAWER)-->
+    <!-- =================================================================== -->
+    <div id="adminBackdrop" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200"></div>
+
+    <aside id="adminDrawer" aria-label="Panel de Personalización"
+           class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-[#0b0d12] border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+
+        <!-- Header del Drawer -->
+        <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between bg-[#08090d]">
+            <div>
+                <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    Personalizar Sitio Web
+                </h2>
+                <p class="text-[11px] text-slate-400">Los cambios se guardan automáticamente en tu navegador</p>
+            </div>
+            <button id="closeAdminBtn" type="button" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer" title="Cerrar panel">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Pestañas de Navegación del Admin -->
+        <div class="grid grid-cols-5 border-b border-white/10 bg-[#090b10] text-[10px] sm:text-[11px] font-medium">
+            <button type="button" data-tab="identidad" class="admin-tab-btn py-2.5 text-center border-b-2 border-red-500 text-white cursor-pointer">Identidad</button>
+            <button type="button" data-tab="logos" class="admin-tab-btn py-2.5 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">Logos</button>
+            <button type="button" data-tab="programacion" class="admin-tab-btn py-2.5 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">Parrilla</button>
+            <button type="button" data-tab="telefonos" class="admin-tab-btn py-2.5 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">Teléfonos</button>
+            <button type="button" data-tab="stream" class="admin-tab-btn py-2.5 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 cursor-pointer">Señal</button>
+        </div>
+
+        <!-- Cuerpo desplazable del Drawer -->
+        <div class="flex-1 overflow-y-auto p-5 space-y-6">
+
+            <!-- TAB 1: IDENTIDAD & LOGO PRINCIPAL -->
+            <div id="tab-identidad" class="admin-tab-panel space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1.5">Nombre de la Emisora</label>
+                    <input id="cfgStationName" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-sm text-white" placeholder="Radio Activa">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1.5">Eslogan (Máquina de escribir)</label>
+                    <input id="cfgSlogan" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-sm font-typewriter text-white" placeholder="Activa tus sentidos">
+                </div>
+
+                <div class="pt-2 border-t border-white/10 space-y-3">
+                    <label class="block text-xs font-medium text-slate-300">Logo Principal (Cabecera)</label>
+                    <div class="flex flex-col gap-2">
+                        <label class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-dashed border-white/20 text-xs text-slate-300 cursor-pointer transition">
+                            <span>📁 Subir archivo de logo (PNG, SVG, JPG)</span>
+                            <input id="cfgMainLogoFile" type="file" accept="image/*" class="hidden">
+                        </label>
+                        <input id="cfgMainLogoUrl" type="url" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3.5 py-2 text-xs font-mono-tech text-slate-200" placeholder="O pega aquí la URL del logo...">
+                    </div>
+
+                    <div class="flex items-center justify-between gap-3">
+                        <label class="text-xs text-slate-400">Altura del logo: <span id="cfgLogoSizeVal" class="text-white font-mono-tech">38px</span></label>
+                        <input id="cfgLogoSize" type="range" min="26" max="64" value="38" class="studio-slider w-36">
+                    </div>
+
+                    <button id="clearMainLogoBtn" type="button" class="text-[11px] text-slate-400 hover:text-red-400 underline cursor-pointer">
+                        Usar emblema vectorial por defecto
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 2: LOGOS ADICIONALES / ALIANZAS -->
+            <div id="tab-logos" class="admin-tab-panel hidden space-y-4">
+                <div class="bg-white/[0.02] border border-white/[0.08] rounded-xl p-3.5 space-y-3">
+                    <h3 class="text-xs font-semibold text-white">Agregar Nuevo Logo (Tamaño Mediano)</h3>
+                    <input id="newPartnerName" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs text-white" placeholder="Nombre de marca o programa (ej. Estudio Central)">
+                    <label class="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-dashed border-white/20 text-xs text-slate-300 cursor-pointer transition">
+                        <span>📁 Seleccionar imagen de logo</span>
+                        <input id="newPartnerFile" type="file" accept="image/*" class="hidden">
+                    </label>
+                    <input id="newPartnerUrl" type="url" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs font-mono-tech text-slate-200" placeholder="O pega URL de la imagen...">
+                    <button id="addPartnerBtn" type="button" class="w-full py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition cursor-pointer">
+                        + Añadir Logo a la Página
+                    </button>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-medium text-slate-400">Logos Activos (Puedes cambiar imagen o eliminar)</h4>
+                    <div id="adminPartnersList" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- TAB 2B: PROGRAMACIÓN DE LA RADIO -->
+            <div id="tab-programacion" class="admin-tab-panel hidden space-y-4">
+                <div class="bg-white/[0.02] border border-white/[0.08] rounded-xl p-3.5 space-y-2.5">
+                    <h3 class="text-xs font-semibold text-white">Agregar Programa a la Parrilla</h3>
+                    <select id="newProgDay" class="w-full bg-black/80 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs text-white">
+                        <option value="lv">Lunes a Viernes</option>
+                        <option value="sab">Sábados</option>
+                        <option value="dom">Domingos</option>
+                    </select>
+                    <input id="newProgTime" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs font-mono-tech text-white" placeholder="Horario (ej. 08:00 - 11:00)">
+                    <input id="newProgTitle" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs text-white" placeholder="Nombre del programa (ej. Mañanas Activas)">
+                    <input id="newProgHost" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs text-white" placeholder="Locutor / Conductor (ej. Con DJ Alex)">
+                    <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                        <input id="newProgLive" type="checkbox" class="rounded bg-black border-white/20 text-red-500 focus:ring-0">
+                        <span>Marcar como "EN VIVO AHORA"</span>
+                    </label>
+                    <button id="addProgBtn" type="button" class="w-full py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition cursor-pointer">
+                        + Agregar Programa
+                    </button>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-medium text-slate-400">Programas Registrados</h4>
+                    <div id="adminScheduleList" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- TAB 3: TELÉFONOS DE CABINA Y WHATSAPP -->
+            <div id="tab-telefonos" class="admin-tab-panel hidden space-y-4">
+                <div class="bg-emerald-500/[0.05] border border-emerald-500/20 rounded-xl p-3.5 space-y-3">
+                    <h3 class="text-xs font-semibold text-emerald-400">WhatsApp Principal Directo</h3>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Número con código de país (sin signos, ej. 59170000000)</label>
+                        <input id="cfgMainWhatsapp" type="text" class="w-full bg-black/60 border border-white/10 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2 text-xs font-mono-tech text-white" placeholder="59170000000">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Mensaje automático al abrir WhatsApp</label>
+                        <textarea id="cfgWhatsappMsg" rows="2" class="w-full bg-black/60 border border-white/10 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2 text-xs text-white" placeholder="¡Hola Radio Activa! Quiero pedir una canción..."></textarea>
+                    </div>
+                </div>
+
+                <div class="bg-white/[0.02] border border-white/[0.08] rounded-xl p-3.5 space-y-2.5">
+                    <h3 class="text-xs font-semibold text-white">Agregar Número de Celular / Línea</h3>
+                    <input id="newPhoneLabel" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs text-white" placeholder="Etiqueta (ej. Cabina Central, Publicidad, Prensa)">
+                    <input id="newPhoneNumber" type="text" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs font-mono-tech text-white" placeholder="Número (ej. +591 71234567)">
+                    <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                        <input id="newPhoneHasWa" type="checkbox" checked class="rounded bg-black border-white/20 text-emerald-500 focus:ring-0">
+                        <span>Habilitar botón directo de WhatsApp en este número</span>
+                    </label>
+                    <button id="addPhoneBtn" type="button" class="w-full py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition cursor-pointer">
+                        + Agregar Número
+                    </button>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-medium text-slate-400">Líneas Registradas</h4>
+                    <div id="adminPhonesList" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <!-- TAB 4: SEÑAL STREAMING -->
+            <div id="tab-stream" class="admin-tab-panel hidden space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1.5">URL Directa de Streaming (Zeno.fm / Icecast)</label>
+                    <input id="cfgStreamUrl" type="url" class="w-full bg-black/60 border border-white/10 focus:border-red-500 focus:outline-none rounded-xl px-3 py-2 text-xs font-mono-tech text-white" value="https://stream.zeno.fm/g658kpeht0hvv">
+                    <p class="text-[11px] text-slate-500 mt-1.5">Por defecto: https://stream.zeno.fm/g658kpeht0hvv</p>
+                </div>
+
+                <div class="flex gap-2">
+                    <button id="applyStreamAdminBtn" type="button" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition cursor-pointer">
+                        Guardar y Sintonizar
+                    </button>
+                    <button id="demoSynthAdminBtn" type="button" class="px-3.5 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 text-xs font-mono-tech transition cursor-pointer">
+                        Audio Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer del Drawer: Exportar / Importar / Restaurar -->
+        <div class="px-4 py-3.5 border-t border-white/10 bg-[#08090d] flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5">
+                <button id="exportConfigBtn" type="button" class="px-2.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-[11px] font-mono-tech text-slate-300 transition cursor-pointer">
+                    Exportar JSON
+                </button>
+                <label class="px-2.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-[11px] font-mono-tech text-slate-300 transition cursor-pointer">
+                    Importar JSON
+                    <input id="importConfigFile" type="file" accept=".json,application/json" class="hidden">
+                </label>
+            </div>
+            <button id="resetConfigBtn" type="button" class="px-2.5 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-[11px] font-mono-tech text-red-400 transition cursor-pointer">
+                Restaurar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Elemento Audio HTML5 sin crossorigin para evitar bloqueo CORS en streams Zeno.fm/Icecast -->
+    <audio id="radioAudio" preload="none"></audio>
+
+    <script>
+        /**
+         * RADIO ACTIVA — "Activa tus sentidos"
+         * Sitio Web Dark Minimalista + Reproductor Cassette Reel-to-Reel
+         * + Pedidos Musicales + Programación + Logos Medianos + WhatsApp Directo
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const STORAGE_KEY = 'radio_activa_site_config_v2';
+
+            // Configuración predeterminada
+            const DEFAULT_CONFIG = {
+                stationName: 'Radio Activa',
+                slogan: 'Activa tus sentidos',
+                mainLogoSrc: '',
+                mainLogoHeight: 38,
+                streamUrl: 'https://stream.zeno.fm/g658kpeht0hvv',
+                mainWhatsapp: '59170000000',
+                whatsappMessage: '¡Hola Radio Activa! Estoy escuchando la señal en vivo y quiero pedir una canción...',
+                partners: [
+                    { id: 'p1', name: 'Activa Noticias', logoSrc: '' },
+                    { id: 'p2', name: 'Sesiones Nocturnas', logoSrc: '' },
+                    { id: 'p3', name: 'Top Hits FM', logoSrc: '' }
+                ],
+                schedule: [
+                    { id: 's1', day: 'lv', time: '07:00 - 10:00', title: 'Despierta Activo', host: 'Con Mariana & Leo', isLive: false },
+                    { id: 's2', day: 'lv', time: '10:00 - 14:00', title: 'Conexión Total', host: 'Cabina Central', isLive: true },
+                    { id: 's3', day: 'lv', time: '18:00 - 22:00', title: 'Ruta Nocturna', host: 'Con DJ Sebas', isLive: false },
+                    { id: 's4', day: 'sab', time: '09:00 - 13:00', title: 'Ranking Semanal Top 20', host: 'Equipo Radio Activa', isLive: false },
+                    { id: 's5', day: 'sab', time: '20:00 - 00:00', title: 'Activa Club Mix', host: 'En Vivo desde Estudio', isLive: false },
+                    { id: 's6', day: 'dom', time: '10:00 - 14:00', title: 'Clásicos & Acústicos', host: 'Selección Especial', isLive: false }
+                ],
+                requests: [
+                    { id: 'r1', listener: 'Valeria R.', artist: 'Cerati', song: 'Crimen', dedication: '¡Saludos a toda la audiencia de Radio Activa!', time: 'Hace 5 min' },
+                    { id: 'r2', listener: 'Diego M.', artist: 'Coldplay', song: 'Viva La Vida', dedication: 'Para activar la tarde en la oficina.', time: 'Hace 14 min' }
+                ],
+                phones: [
+                    { id: 'ph1', label: 'Cabina Central en Vivo', number: '+591 70000000', hasWhatsapp: true },
+                    { id: 'ph2', label: 'Publicidad & Auspicios', number: '+591 71111111', hasWhatsapp: true },
+                    { id: 'ph3', label: 'Prensa & Reportes', number: '+591 72222222', hasWhatsapp: false }
+                ]
+            };
+
+            let siteConfig = loadConfig();
+            let activeScheduleDay = 'lv';
+
+            function loadConfig() {
+                try {
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        return {
+                            ...DEFAULT_CONFIG,
+                            ...parsed,
+                            partners: parsed.partners || DEFAULT_CONFIG.partners,
+                            schedule: parsed.schedule || DEFAULT_CONFIG.schedule,
+                            requests: parsed.requests || DEFAULT_CONFIG.requests,
+                            phones: parsed.phones || DEFAULT_CONFIG.phones
+                        };
+                    }
+                } catch (e) {
+                    console.warn('No se pudo leer localStorage:', e);
+                }
+                return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+            }
+
+            function saveConfig() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(siteConfig));
+                } catch (e) {
+                    showMessage('No se pudo guardar en el navegador (imagen muy pesada).', 'error', 4500);
+                }
+            }
+
+            // =================================================================
+            // REFERENCIAS DOM DEL REPRODUCTOR CASSETTE
+            // =================================================================
+            const leftReel = document.getElementById('leftReel');
+            const rightReel = document.getElementById('rightReel');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const playBtnLabel = document.getElementById('playBtnLabel');
+            const iconPlay = document.getElementById('iconPlay');
+            const iconPause = document.getElementById('iconPause');
+            const stopBtn = document.getElementById('stopBtn');
+            const retypeBtn = document.getElementById('retypeBtn');
+            const liveLed = document.getElementById('liveLed');
+            const statusText = document.getElementById('statusText');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeLabel = document.getElementById('volumeLabel');
+            const muteBtn = document.getElementById('muteBtn');
+            const volIconHigh = document.getElementById('volIconHigh');
+            const volIconMute = document.getElementById('volIconMute');
+            const typewriterSlogan = document.getElementById('typewriterSlogan');
+            const toastBox = document.getElementById('toastBox');
+            const vuBars = document.querySelectorAll('.vu-bar');
+            const radioAudio = document.getElementById('radioAudio');
+
+            // =================================================================
+            // REFERENCIAS DOM DEL SITIO & PANEL ADMIN
+            // =================================================================
+            const navStationName = document.getElementById('navStationName');
+            const navSloganSub = document.getElementById('navSloganSub');
+            const deckStationTitle = document.getElementById('deckStationTitle');
+            const cassetteBrandText = document.getElementById('cassetteBrandText');
+            const footerStationName = document.getElementById('footerStationName');
+            const footerSlogan = document.getElementById('footerSlogan');
+            const defaultLogoEmblem = document.getElementById('defaultLogoEmblem');
+            const customLogoImg = document.getElementById('customLogoImg');
+            const partnerLogosGrid = document.getElementById('partnerLogosGrid');
+            const phoneLinesContainer = document.getElementById('phoneLinesContainer');
+            const mainWhatsappDisplay = document.getElementById('mainWhatsappDisplay');
+            const mainWhatsappCardBtn = document.getElementById('mainWhatsappCardBtn');
+            const navWhatsappQuick = document.getElementById('navWhatsappQuick');
+            const floatingWhatsappBtn = document.getElementById('floatingWhatsappBtn');
+
+            // Pedidos Musicales & Programación
+            const songRequestForm = document.getElementById('songRequestForm');
+            const reqListenerName = document.getElementById('reqListenerName');
+            const reqArtistName = document.getElementById('reqArtistName');
+            const reqSongTitle = document.getElementById('reqSongTitle');
+            const reqDedication = document.getElementById('reqDedication');
+            const sendReqWhatsappBtn = document.getElementById('sendReqWhatsappBtn');
+            const songRequestsWall = document.getElementById('songRequestsWall');
+            const requestsCountBadge = document.getElementById('requestsCountBadge');
+            const scheduleGrid = document.getElementById('scheduleGrid');
+            const scheduleDayBtns = document.querySelectorAll('.schedule-day-btn');
+
+            // Drawer Admin
+            const adminDrawer = document.getElementById('adminDrawer');
+            const adminBackdrop = document.getElementById('adminBackdrop');
+            const openAdminBtn = document.getElementById('openAdminBtn');
+            const closeAdminBtn = document.getElementById('closeAdminBtn');
+            const tabBtns = document.querySelectorAll('.admin-tab-btn');
+            const tabPanels = document.querySelectorAll('.admin-tab-panel');
+
+            // Campos Admin
+            const cfgStationName = document.getElementById('cfgStationName');
+            const cfgSlogan = document.getElementById('cfgSlogan');
+            const cfgMainLogoFile = document.getElementById('cfgMainLogoFile');
+            const cfgMainLogoUrl = document.getElementById('cfgMainLogoUrl');
+            const cfgLogoSize = document.getElementById('cfgLogoSize');
+            const cfgLogoSizeVal = document.getElementById('cfgLogoSizeVal');
+            const clearMainLogoBtn = document.getElementById('clearMainLogoBtn');
+
+            const newPartnerName = document.getElementById('newPartnerName');
+            const newPartnerFile = document.getElementById('newPartnerFile');
+            const newPartnerUrl = document.getElementById('newPartnerUrl');
+            const addPartnerBtn = document.getElementById('addPartnerBtn');
+            const adminPartnersList = document.getElementById('adminPartnersList');
+
+            const newProgDay = document.getElementById('newProgDay');
+            const newProgTime = document.getElementById('newProgTime');
+            const newProgTitle = document.getElementById('newProgTitle');
+            const newProgHost = document.getElementById('newProgHost');
+            const newProgLive = document.getElementById('newProgLive');
+            const addProgBtn = document.getElementById('addProgBtn');
+            const adminScheduleList = document.getElementById('adminScheduleList');
+
+            const cfgMainWhatsapp = document.getElementById('cfgMainWhatsapp');
+            const cfgWhatsappMsg = document.getElementById('cfgWhatsappMsg');
+            const newPhoneLabel = document.getElementById('newPhoneLabel');
+            const newPhoneNumber = document.getElementById('newPhoneNumber');
+            const newPhoneHasWa = document.getElementById('newPhoneHasWa');
+            const addPhoneBtn = document.getElementById('addPhoneBtn');
+            const adminPhonesList = document.getElementById('adminPhonesList');
+
+            const cfgStreamUrl = document.getElementById('cfgStreamUrl');
+            const applyStreamAdminBtn = document.getElementById('applyStreamAdminBtn');
+            const demoSynthAdminBtn = document.getElementById('demoSynthAdminBtn');
+            const exportConfigBtn = document.getElementById('exportConfigBtn');
+            const importConfigFile = document.getElementById('importConfigFile');
+            const resetConfigBtn = document.getElementById('resetConfigBtn');
+
+            // =================================================================
+            // NOTIFICACIONES DISCRETAS (SIN ALERT)
+            // =================================================================
+            let toastTimeout = null;
+            function showMessage(msg, type = 'warning', durationMs = 4500) {
+                toastBox.textContent = msg;
+                toastBox.classList.remove(
+                    'hidden',
+                    'bg-amber-500/15', 'border-amber-500/40', 'text-amber-200',
+                    'bg-red-500/15', 'border-red-500/40', 'text-red-200',
+                    'bg-emerald-500/15', 'border-emerald-500/40', 'text-emerald-200'
+                );
+
+                if (type === 'error') {
+                    toastBox.classList.add('bg-red-500/15', 'border-red-500/40', 'text-red-200');
+                } else if (type === 'info') {
+                    toastBox.classList.add('bg-emerald-500/15', 'border-emerald-500/40', 'text-emerald-200');
+                } else {
+                    toastBox.classList.add('bg-amber-500/15', 'border-amber-500/40', 'text-amber-200');
+                }
+
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toastBox.classList.add('hidden');
+                }, durationMs);
+            }
+
+            // =================================================================
+            // EFECTO MÁQUINA DE ESCRIBIR ("Activa tus sentidos")
+            // =================================================================
+            let typingTimer = null;
+            function playTypewriterEffect() {
+                clearTimeout(typingTimer);
+                const phrase = siteConfig.slogan || 'Activa tus sentidos';
+                typewriterSlogan.textContent = '';
+                typewriterSlogan.classList.add('typing-cursor');
+                let index = 0;
+
+                function typeNextChar() {
+                    if (index < phrase.length) {
+                        typewriterSlogan.textContent += phrase.charAt(index);
+                        index++;
+                        const jitter = Math.floor(Math.random() * 65) + 55;
+                        typingTimer = setTimeout(typeNextChar, jitter);
+                    }
+                }
+                typeNextChar();
+            }
+
+            retypeBtn.addEventListener('click', playTypewriterEffect);
+
+            // =================================================================
+            // RENDERIZADO DINÁMICO DE IDENTIDAD, LOGOS Y CONTACTOS
+            // =================================================================
+            function sanitizePhoneDigits(raw) {
+                return String(raw || '').replace(/[^\d]/g, '');
+            }
+
+            function buildWhatsappLink(phoneDigits, customText) {
+                const clean = sanitizePhoneDigits(phoneDigits);
+                const msg = encodeURIComponent(customText || siteConfig.whatsappMessage || '');
+                return `https://wa.me/${clean}${msg ? `?text=${msg}` : ''}`;
+            }
+
+            function escapeHtml(str) {
+                return String(str || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function renderAllSiteData(retype = false) {
+                // 1. Textos de marca
+                const name = siteConfig.stationName || 'Radio Activa';
+                const slogan = siteConfig.slogan || 'Activa tus sentidos';
+
+                document.title = `${name} — ${slogan}`;
+                navStationName.textContent = name;
+                navSloganSub.textContent = slogan;
+                deckStationTitle.textContent = name;
+                cassetteBrandText.textContent = name;
+                footerStationName.textContent = name;
+                footerSlogan.textContent = `"${slogan}"`;
+
+                if (retype) {
+                    playTypewriterEffect();
+                }
+
+                // 2. Logo Principal
+                if (siteConfig.mainLogoSrc) {
+                    customLogoImg.src = siteConfig.mainLogoSrc;
+                    customLogoImg.style.height = `${siteConfig.mainLogoHeight || 38}px`;
+                    customLogoImg.classList.remove('hidden');
+                    defaultLogoEmblem.classList.add('hidden');
+                } else {
+                    customLogoImg.classList.add('hidden');
+                    defaultLogoEmblem.classList.remove('hidden');
+                }
+
+                // 3. WhatsApp Principal
+                const waDigits = sanitizePhoneDigits(siteConfig.mainWhatsapp);
+                const waFormatted = waDigits ? `+${waDigits}` : 'No configurado';
+                const waHref = buildWhatsappLink(waDigits, siteConfig.whatsappMessage);
+
+                mainWhatsappDisplay.textContent = waFormatted;
+                mainWhatsappCardBtn.href = waHref;
+                navWhatsappQuick.href = waHref;
+                floatingWhatsappBtn.href = waHref;
+
+                // 4. Pedidos Musicales & Programación
+                renderSongRequests();
+                renderSchedule();
+
+                // 5. Galería de Logos & Alianzas (Tamaño Mediano)
+                renderPartnerLogos();
+
+                // 6. Tarjetas de Teléfonos / Celulares
+                renderPhoneCards();
+
+                // 7. Sincronizar inputs del Drawer Admin
+                syncAdminInputs();
+            }
+
+            // =================================================================
+            // RENDERIZADO DE PEDIDOS MUSICALES
+            // =================================================================
+            function renderSongRequests() {
+                const list = siteConfig.requests || [];
+                requestsCountBadge.textContent = `${list.length} ${list.length === 1 ? 'pedido' : 'pedidos'}`;
+
+                if (list.length === 0) {
+                    songRequestsWall.innerHTML = `
+                        <div class="p-6 text-center text-xs text-slate-500 border border-dashed border-white/10 rounded-xl">
+                            Aún no hay pedidos en el muro. ¡Sé el primero en pedir tu canción!
+                        </div>`;
+                    return;
+                }
+
+                songRequestsWall.innerHTML = list.map(req => `
+                    <div class="bg-black/45 border border-white/[0.06] rounded-xl p-3 flex flex-col gap-1">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-bold text-white truncate">🎵 ${escapeHtml(req.song)} — <span class="text-red-400 font-semibold">${escapeHtml(req.artist)}</span></span>
+                            <span class="text-[10px] font-mono-tech text-slate-500 shrink-0">${escapeHtml(req.time || 'Ahora')}</span>
+                        </div>
+                        <p class="text-[11px] text-slate-300">Pedido por <span class="font-semibold text-amber-300">${escapeHtml(req.listener)}</span></p>
+                        ${req.dedication ? `<p class="text-[11px] font-typewriter text-slate-400 italic">"${escapeHtml(req.dedication)}"</p>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            songRequestForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const listener = reqListenerName.value.trim();
+                const artist = reqArtistName.value.trim();
+                const song = reqSongTitle.value.trim();
+                const dedication = reqDedication.value.trim();
+
+                if (!listener || !artist || !song) return;
+
+                siteConfig.requests.unshift({
+                    id: 'req_' + Date.now(),
+                    listener,
+                    artist,
+                    song,
+                    dedication,
+                    time: 'Recién'
+                });
+                if (siteConfig.requests.length > 20) siteConfig.requests.pop();
+
+                saveConfig();
+                renderSongRequests();
+                songRequestForm.reset();
+                showMessage(`¡Pedido de "${song}" enviado al muro de cabina!`, 'info', 3500);
+            });
+
+            sendReqWhatsappBtn.addEventListener('click', () => {
+                const listener = reqListenerName.value.trim() || 'Un oyente';
+                const artist = reqArtistName.value.trim();
+                const song = reqSongTitle.value.trim();
+                const dedication = reqDedication.value.trim();
+
+                if (!song || !artist) {
+                    showMessage('Escribe al menos el artista y la canción para enviar a WhatsApp.', 'warning', 3500);
+                    return;
+                }
+
+                const text = `¡Hola ${siteConfig.stationName}! Soy *${listener}* y quiero pedir:\n🎵 *Canción:* ${song}\n🎤 *Artista:* ${artist}${dedication ? `\n💬 *Dedicatoria:* ${dedication}` : ''}`;
+                const url = buildWhatsappLink(siteConfig.mainWhatsapp, text);
+                window.open(url, '_blank', 'noopener,noreferrer');
+            });
+
+            // =================================================================
+            // RENDERIZADO DE PROGRAMACIÓN DE LA RADIO
+            // =================================================================
+            function renderSchedule() {
+                const items = (siteConfig.schedule || []).filter(p => p.day === activeScheduleDay);
+
+                scheduleDayBtns.forEach(btn => {
+                    const isSelected = btn.getAttribute('data-day') === activeScheduleDay;
+                    btn.classList.toggle('bg-red-600', isSelected);
+                    btn.classList.toggle('text-white', isSelected);
+                    btn.classList.toggle('font-medium', isSelected);
+                    btn.classList.toggle('text-slate-400', !isSelected);
+                });
+
+                if (items.length === 0) {
+                    scheduleGrid.innerHTML = `
+                        <div class="col-span-full glass-dark rounded-2xl p-6 text-center text-xs text-slate-500">
+                            No hay programas cargados para este día. Agrégalos desde "Personalizar Web > Parrilla".
+                        </div>`;
+                    return;
+                }
+
+                scheduleGrid.innerHTML = items.map(prog => `
+                    <div class="glass-dark rounded-2xl p-4 flex flex-col justify-between gap-3 ${prog.isLive ? 'border-red-500/40 shadow-[0_0_25px_-8px_rgba(239,68,68,0.35)]' : 'hover:border-white/15'} transition">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-mono-tech text-amber-400 font-bold">${escapeHtml(prog.time)}</span>
+                            ${prog.isLive
+                                ? `<span class="inline-flex items-center gap-1.5 text-[10px] font-mono-tech px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/40 font-bold">
+                                     <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>EN VIVO AHORA
+                                   </span>`
+                                : `<span class="text-[10px] font-mono-tech text-slate-500">PROGRAMA</span>`
+                            }
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white">${escapeHtml(prog.title)}</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">${escapeHtml(prog.host)}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            scheduleDayBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeScheduleDay = btn.getAttribute('data-day');
+                    renderSchedule();
+                });
+            });
+
+            // =================================================================
+            // RENDERIZADO DE LOGOS EN TAMAÑO MEDIANO (CON CAMBIO DIRECTO)
+            // =================================================================
+            function renderPartnerLogos() {
+                if (!siteConfig.partners || siteConfig.partners.length === 0) {
+                    partnerLogosGrid.innerHTML = `
+                        <div class="col-span-full glass-dark rounded-2xl p-8 text-center text-xs text-slate-500">
+                            No hay logos cargados. Haz clic en "+ Añadir / Gestionar Logos" para subir emblemas de tamaño mediano.
+                        </div>`;
+                    return;
+                }
+
+                partnerLogosGrid.innerHTML = siteConfig.partners.map((item, idx) => {
+                    const hasImg = Boolean(item.logoSrc);
+                    return `
+                        <div class="glass-dark rounded-2xl p-5 flex flex-col items-center justify-between gap-3 text-center group hover:border-white/20 transition min-h-[168px] relative">
+                            <div class="w-full h-24 flex items-center justify-center rounded-xl bg-black/35 border border-white/[0.05] p-3 overflow-hidden">
+                                ${hasImg
+                                    ? `<img src="${escapeHtml(item.logoSrc)}" alt="${escapeHtml(item.name)}" class="max-h-20 max-w-full w-auto object-contain transition duration-300 group-hover:scale-105">`
+                                    : `<div class="flex flex-col items-center gap-1 text-slate-500 group-hover:text-red-400 transition">
+                                         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                         </svg>
+                                         <span class="text-[10px] font-mono-tech">Sin imagen aún</span>
+                                       </div>`
+                                }
+                            </div>
+                            <div class="w-full flex items-center justify-between gap-2">
+                                <span class="text-xs font-semibold text-slate-200 truncate">
+                                    ${escapeHtml(item.name)}
+                                </span>
+                                <label class="shrink-0 text-[10px] font-mono-tech px-2 py-1 rounded-lg bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 text-slate-300 hover:text-white cursor-pointer transition" title="Subir o cambiar imagen de este logo">
+                                    Cambiar Logo
+                                    <input type="file" accept="image/*" data-quick-logo-idx="${idx}" class="quick-logo-upload hidden">
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Permitir cambiar la imagen del logo directamente desde la tarjeta
+                document.querySelectorAll('.quick-logo-upload').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const file = e.target.files[0];
+                        const idx = parseInt(input.getAttribute('data-quick-logo-idx'), 10);
+                        if (!file || isNaN(idx)) return;
+
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            siteConfig.partners[idx].logoSrc = reader.result;
+                            saveConfig();
+                            renderAllSiteData(false);
+                            showMessage(`Logo "${siteConfig.partners[idx].name}" actualizado.`, 'info', 2500);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                });
+            }
+
+            function renderPhoneCards() {
+                if (!siteConfig.phones || siteConfig.phones.length === 0) {
+                    phoneLinesContainer.innerHTML = `
+                        <div class="col-span-full glass-dark rounded-2xl p-6 text-center text-xs text-slate-500">
+                            No hay líneas registradas. Haz clic en "+ Editar Números" para agregar celulares de contacto.
+                        </div>`;
+                    return;
+                }
+
+                phoneLinesContainer.innerHTML = siteConfig.phones.map((ph) => {
+                    const digits = sanitizePhoneDigits(ph.number);
+                    const waUrl = buildWhatsappLink(digits, siteConfig.whatsappMessage);
+                    return `
+                        <div class="glass-dark rounded-2xl p-4 flex flex-col justify-between gap-3 hover:border-white/15 transition">
+                            <div>
+                                <span class="text-[11px] font-mono-tech uppercase tracking-wider text-slate-400 block">
+                                    ${escapeHtml(ph.label)}
+                                </span>
+                                <p class="font-mono-tech text-base font-bold text-white mt-0.5 select-all">
+                                    ${escapeHtml(ph.number)}
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 pt-1">
+                                <a href="tel:+${digits}" class="flex-1 py-2 px-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-xs font-medium text-slate-200 text-center transition">
+                                    Llamar
+                                </a>
+                                <button type="button" data-copy-phone="${escapeHtml(ph.number)}" class="copy-phone-btn py-2 px-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-xs font-mono-tech text-slate-300 transition cursor-pointer" title="Copiar número">
+                                    Copiar
+                                </button>
+                                ${ph.hasWhatsapp ? `
+                                    <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="py-2 px-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 text-xs font-medium transition" title="Abrir WhatsApp">
+                                        WA
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Eventos para copiar número al portapapeles (con fallback execCommand)
+                document.querySelectorAll('.copy-phone-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const num = btn.getAttribute('data-copy-phone');
+                        copyTextToClipboard(num);
+                        const prev = btn.textContent;
+                        btn.textContent = '✓';
+                        setTimeout(() => { btn.textContent = prev; }, 1400);
+                    });
+                });
+            }
+
+            function copyTextToClipboard(text) {
+                const temp = document.createElement('textarea');
+                temp.value = text;
+                document.body.appendChild(temp);
+                temp.select();
+                try {
+                    document.execCommand('copy');
+                    showMessage(`Copiado al portapapeles: ${text}`, 'info', 2500);
+                } catch (e) {
+                    showMessage('No se pudo copiar automáticamente.', 'error', 2500);
+                }
+                document.body.removeChild(temp);
+            }
+
+            // =================================================================
+            // LÓGICA DEL PANEL DE ADMINISTRACIÓN (DRAWER)
+            // =================================================================
+            function openAdminDrawer(defaultTab = 'identidad') {
+                switchAdminTab(defaultTab);
+                adminBackdrop.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    adminBackdrop.classList.remove('opacity-0');
+                    adminDrawer.classList.remove('translate-x-full');
+                });
+            }
+
+            function closeAdminDrawer() {
+                adminBackdrop.classList.add('opacity-0');
+                adminDrawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    adminBackdrop.classList.add('hidden');
+                }, 280);
+            }
+
+            function switchAdminTab(tabName) {
+                tabBtns.forEach(btn => {
+                    const active = btn.getAttribute('data-tab') === tabName;
+                    btn.classList.toggle('border-red-500', active);
+                    btn.classList.toggle('text-white', active);
+                    btn.classList.toggle('border-transparent', !active);
+                    btn.classList.toggle('text-slate-400', !active);
+                });
+                tabPanels.forEach(panel => {
+                    panel.classList.toggle('hidden', panel.id !== `tab-${tabName}`);
+                });
+            }
+
+            openAdminBtn.addEventListener('click', () => openAdminDrawer('identidad'));
+            closeAdminBtn.addEventListener('click', closeAdminDrawer);
+            adminBackdrop.addEventListener('click', closeAdminDrawer);
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => switchAdminTab(btn.getAttribute('data-tab')));
+            });
+
+            document.querySelectorAll('.open-admin-tab').forEach(btn => {
+                btn.addEventListener('click', () => openAdminDrawer(btn.getAttribute('data-open-tab')));
+            });
+
+            function syncAdminInputs() {
+                cfgStationName.value = siteConfig.stationName;
+                cfgSlogan.value = siteConfig.slogan;
+                cfgMainLogoUrl.value = siteConfig.mainLogoSrc.startsWith('data:') ? '' : siteConfig.mainLogoSrc;
+                cfgLogoSize.value = siteConfig.mainLogoHeight || 38;
+                cfgLogoSizeVal.textContent = `${siteConfig.mainLogoHeight || 38}px`;
+                cfgMainWhatsapp.value = siteConfig.mainWhatsapp;
+                cfgWhatsappMsg.value = siteConfig.whatsappMessage;
+                cfgStreamUrl.value = siteConfig.streamUrl;
+
+                // Lista editable de logos en el drawer
+                adminPartnersList.innerHTML = siteConfig.partners.map((p, idx) => `
+                    <div class="flex items-center justify-between gap-2 bg-black/50 border border-white/10 rounded-xl px-3 py-2">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            ${p.logoSrc ? `<img src="${escapeHtml(p.logoSrc)}" class="w-9 h-9 object-contain rounded bg-black/40 p-1">` : `<span class="text-xs text-slate-500">🎙️</span>`}
+                            <span class="text-xs text-slate-200 truncate">${escapeHtml(p.name)}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <label class="text-[11px] text-amber-400 hover:text-amber-300 px-2 py-1 rounded bg-white/5 cursor-pointer">
+                                Subir
+                                <input type="file" accept="image/*" data-admin-logo-idx="${idx}" class="admin-logo-replace hidden">
+                            </label>
+                            <button type="button" data-del-partner="${idx}" class="del-partner-btn text-[11px] text-red-400 hover:text-red-300 px-2 py-1 cursor-pointer">Quitar</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                document.querySelectorAll('.admin-logo-replace').forEach(inp => {
+                    inp.addEventListener('change', (e) => {
+                        const file = e.target.files[0];
+                        const i = parseInt(inp.getAttribute('data-admin-logo-idx'), 10);
+                        if (!file || isNaN(i)) return;
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            siteConfig.partners[i].logoSrc = reader.result;
+                            saveConfig();
+                            renderAllSiteData(false);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                });
+
+                document.querySelectorAll('.del-partner-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const i = parseInt(btn.getAttribute('data-del-partner'), 10);
+                        siteConfig.partners.splice(i, 1);
+                        saveConfig();
+                        renderAllSiteData(false);
+                    });
+                });
+
+                // Lista editable de programación en el drawer
+                const dayNames = { lv: 'Lun-Vie', sab: 'Sáb', dom: 'Dom' };
+                adminScheduleList.innerHTML = (siteConfig.schedule || []).map((prog, idx) => `
+                    <div class="flex items-center justify-between gap-2 bg-black/50 border border-white/10 rounded-xl px-3 py-2">
+                        <div class="min-w-0">
+                            <p class="text-xs font-medium text-white truncate">
+                                <span class="text-amber-400 font-mono-tech">[${dayNames[prog.day] || prog.day}]</span> ${escapeHtml(prog.title)}
+                            </p>
+                            <p class="text-[11px] font-mono-tech text-slate-400">${escapeHtml(prog.time)} · ${escapeHtml(prog.host)}</p>
+                        </div>
+                        <button type="button" data-del-prog="${idx}" class="del-prog-btn text-xs text-red-400 hover:text-red-300 px-2 py-1 cursor-pointer">Eliminar</button>
+                    </div>
+                `).join('');
+
+                document.querySelectorAll('.del-prog-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const i = parseInt(btn.getAttribute('data-del-prog'), 10);
+                        siteConfig.schedule.splice(i, 1);
+                        saveConfig();
+                        renderAllSiteData(false);
+                    });
+                });
+
+                // Lista editable de teléfonos en el drawer
+                adminPhonesList.innerHTML = siteConfig.phones.map((ph, idx) => `
+                    <div class="flex items-center justify-between gap-2 bg-black/50 border border-white/10 rounded-xl px-3 py-2">
+                        <div class="min-w-0">
+                            <p class="text-xs font-medium text-white truncate">${escapeHtml(ph.label)}</p>
+                            <p class="text-[11px] font-mono-tech text-slate-400">${escapeHtml(ph.number)} ${ph.hasWhatsapp ? '· WA' : ''}</p>
+                        </div>
+                        <button type="button" data-del-phone="${idx}" class="del-phone-btn text-xs text-red-400 hover:text-red-300 px-2 py-1 cursor-pointer">Eliminar</button>
+                    </div>
+                `).join('');
+
+                document.querySelectorAll('.del-phone-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const i = parseInt(btn.getAttribute('data-del-phone'), 10);
+                        siteConfig.phones.splice(i, 1);
+                        saveConfig();
+                        renderAllSiteData(false);
+                    });
+                });
+            }
+
+            // Listeners de edición en tiempo real
+            cfgStationName.addEventListener('input', (e) => {
+                siteConfig.stationName = e.target.value;
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            cfgSlogan.addEventListener('input', (e) => {
+                siteConfig.slogan = e.target.value;
+                saveConfig();
+                renderAllSiteData(true);
+            });
+
+            cfgLogoSize.addEventListener('input', (e) => {
+                siteConfig.mainLogoHeight = parseInt(e.target.value, 10);
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            cfgMainLogoUrl.addEventListener('change', (e) => {
+                siteConfig.mainLogoSrc = e.target.value.trim();
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            cfgMainLogoFile.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    siteConfig.mainLogoSrc = reader.result;
+                    saveConfig();
+                    renderAllSiteData(false);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            clearMainLogoBtn.addEventListener('click', () => {
+                siteConfig.mainLogoSrc = '';
+                cfgMainLogoUrl.value = '';
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            // Agregar nuevo programa
+            addProgBtn.addEventListener('click', () => {
+                const day = newProgDay.value;
+                const time = newProgTime.value.trim();
+                const title = newProgTitle.value.trim();
+                const host = newProgHost.value.trim() || 'Radio Activa';
+                const isLive = newProgLive.checked;
+
+                if (!time || !title) {
+                    showMessage('Completa el horario y el nombre del programa.', 'warning', 3000);
+                    return;
+                }
+
+                if (isLive) {
+                    siteConfig.schedule.forEach(p => { p.isLive = false; });
+                }
+
+                siteConfig.schedule.push({
+                    id: 's_' + Date.now(),
+                    day,
+                    time,
+                    title,
+                    host,
+                    isLive
+                });
+
+                newProgTime.value = '';
+                newProgTitle.value = '';
+                newProgHost.value = '';
+                newProgLive.checked = false;
+                activeScheduleDay = day;
+                saveConfig();
+                renderAllSiteData(false);
+                showMessage(`Programa "${title}" agregado a la parrilla.`, 'info', 2500);
+            });
+
+            // WhatsApp y teléfonos
+            cfgMainWhatsapp.addEventListener('input', (e) => {
+                siteConfig.mainWhatsapp = e.target.value;
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            cfgWhatsappMsg.addEventListener('input', (e) => {
+                siteConfig.whatsappMessage = e.target.value;
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            addPhoneBtn.addEventListener('click', () => {
+                const label = newPhoneLabel.value.trim();
+                const number = newPhoneNumber.value.trim();
+                if (!label || !number) {
+                    showMessage('Completa la etiqueta y el número de celular.', 'warning', 3000);
+                    return;
+                }
+                siteConfig.phones.push({
+                    id: 'ph_' + Date.now(),
+                    label,
+                    number,
+                    hasWhatsapp: newPhoneHasWa.checked
+                });
+                newPhoneLabel.value = '';
+                newPhoneNumber.value = '';
+                saveConfig();
+                renderAllSiteData(false);
+            });
+
+            exportConfigBtn.addEventListener('click', () => {
+                copyTextToClipboard(JSON.stringify(siteConfig, null, 2));
+            });
+
+            importConfigFile.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    try {
+                        const imported = JSON.parse(reader.result);
+                        siteConfig = { ...DEFAULT_CONFIG, ...imported };
+                        saveConfig();
+                        renderAllSiteData(true);
+                        showMessage('Configuración JSON importada correctamente.', 'info', 3000);
+                    } catch (err) {
+                        showMessage('El archivo JSON no tiene un formato válido.', 'error', 3500);
+                    }
+                };
+                reader.readAsText(file);
+                importConfigFile.value = '';
+            });
+
+            resetConfigBtn.addEventListener('click', () => {
+                localStorage.removeItem(STORAGE_KEY);
+                siteConfig = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+                renderAllSiteData(true);
+                showMessage('Configuración restaurada a los valores originales de Radio Activa.', 'info', 3500);
+            });
+
+            // =================================================================
+            // MOTOR DE ROTACIÓN SINCRONIZADA DE LOS DOS TAMBORES DEL CASSETTE
+            // =================================================================
+            let isPlaying = false;
+            let isDemoSynthActive = false;
+            let leftAngle = 0;
+            let rightAngle = 0;
+            let currentVelocity = 0;
+            let targetVelocity = 0;
+            let lastFrameTime = performance.now();
+            let reconnectTimer = null;
+
+            let audioCtx = null;
+            let demoInterval = null;
+            let demoMasterGain = null;
+
+            function animateCassette(now) {
+                const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
+                lastFrameTime = now;
+
+                const smoothing = isPlaying ? 4.5 : 3.2;
+                currentVelocity += (targetVelocity - currentVelocity) * Math.min(1, dt * smoothing);
+
+                if (Math.abs(currentVelocity) > 0.05) {
+                    leftAngle = (leftAngle + currentVelocity * 1.22 * dt) % 360;
+                    rightAngle = (rightAngle + currentVelocity * 1.0 * dt) % 360;
+
+                    leftReel.setAttribute('transform', `rotate(${leftAngle.toFixed(2)})`);
+                    rightReel.setAttribute('transform', `rotate(${rightAngle.toFixed(2)})`);
+                }
+
+                updateVuMeter(now);
+                requestAnimationFrame(animateCassette);
+            }
+
+            function updateVuMeter(now) {
+                if (!isPlaying) {
+                    vuBars.forEach(bar => {
+                        bar.style.opacity = '0.25';
+                        bar.style.transform = 'scaleY(0.6)';
+                    });
+                    return;
+                }
+
+                const vol = radioAudio.muted ? 0 : parseFloat(volumeSlider.value);
+                let level = 0;
+
+                if (vol > 0) {
+                    const beatPulse = Math.pow(Math.sin(now * 0.0085) * 0.5 + 0.5, 1.6);
+                    const vocalMid = Math.sin(now * 0.019 + 1.1) * 0.5 + 0.5;
+                    const hiHat = Math.cos(now * 0.037) * 0.5 + 0.5;
+                    level = (beatPulse * 0.55 + vocalMid * 0.3 + hiHat * 0.15) * vol;
+                }
+
+                vuBars.forEach((bar, index) => {
+                    const threshold = (index + 1) / vuBars.length;
+                    if (level >= threshold * 0.72) {
+                        bar.style.opacity = '1';
+                        bar.style.transform = 'scaleY(1.1)';
+                    } else {
+                        bar.style.opacity = '0.25';
+                        bar.style.transform = 'scaleY(0.65)';
+                    }
+                });
+            }
+
+            requestAnimationFrame(animateCassette);
+
+            // =================================================================
+            // GENERADOR DE AUDIO ANALÓGICO DE DEMOSTRACIÓN (OPCIONAL)
+            // =================================================================
+            function startDemoSynth() {
+                stopDemoSynth();
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!audioCtx) {
+                    audioCtx = new AudioContext();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                demoMasterGain = audioCtx.createGain();
+                demoMasterGain.gain.value = radioAudio.muted ? 0 : parseFloat(volumeSlider.value) * 0.22;
+                demoMasterGain.connect(audioCtx.destination);
+
+                const chords = [
+                    [261.63, 329.63, 392.00, 493.88],
+                    [220.00, 261.63, 329.63, 392.00],
+                    [174.61, 220.00, 261.63, 349.23],
+                    [196.00, 246.94, 293.66, 392.00]
+                ];
+                let step = 0;
+
+                function playChord() {
+                    if (!isDemoSynthActive || !audioCtx) return;
+                    const now = audioCtx.currentTime;
+                    const chord = chords[step % chords.length];
+                    chord.forEach((freq) => {
+                        const osc = audioCtx.createOscillator();
+                        const noteGain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now);
+
+                        noteGain.gain.setValueAtTime(0.001, now);
+                        noteGain.gain.exponentialRampToValueAtTime(0.25, now + 0.15);
+                        noteGain.gain.exponentialRampToValueAtTime(0.001, now + 1.45);
+
+                        osc.connect(noteGain);
+                        noteGain.connect(demoMasterGain);
+                        osc.start(now);
+                        osc.stop(now + 1.5);
+                    });
+                    step++;
+                }
+
+                isDemoSynthActive = true;
+                playChord();
+                demoInterval = setInterval(playChord, 1500);
+            }
+
+            function stopDemoSynth() {
+                isDemoSynthActive = false;
+                if (demoInterval) {
+                    clearInterval(demoInterval);
+                    demoInterval = null;
+                }
+                if (demoMasterGain) {
+                    try { demoMasterGain.disconnect(); } catch (e) {}
+                    demoMasterGain = null;
+                }
+            }
+
+            // =================================================================
+            // CONTROL DE STREAMING EN VIVO ZENO.FM (SIN CORS, CON CACHE-BUSTER)
+            // =================================================================
+            function setUIState(playing, statusLabel) {
+                isPlaying = playing;
+                targetVelocity = playing ? 72 : 0;
+                statusText.textContent = statusLabel;
+
+                if (playing) {
+                    playPauseBtn.classList.add('active');
+                    playBtnLabel.textContent = 'PAUSE';
+                    iconPlay.classList.add('hidden');
+                    iconPause.classList.remove('hidden');
+                    liveLed.classList.remove('led-live-off');
+                    liveLed.classList.add('led-live-on');
+                } else {
+                    playPauseBtn.classList.remove('active');
+                    playBtnLabel.textContent = 'PLAY';
+                    iconPlay.classList.remove('hidden');
+                    iconPause.classList.add('hidden');
+                    liveLed.classList.remove('led-live-on');
+                    liveLed.classList.add('led-live-off');
+                }
+            }
+
+            function getConfiguredStreamUrl() {
+                let raw = (siteConfig.streamUrl || DEFAULT_CONFIG.streamUrl).trim();
+                if (/\.pls(\?.*)?$/i.test(raw)) {
+                    raw = raw.replace(/\.pls(\?.*)?$/i, '$1');
+                    siteConfig.streamUrl = raw;
+                    saveConfig();
+                }
+                return raw || DEFAULT_CONFIG.streamUrl;
+            }
+
+            function buildLiveCacheBustedUrl(baseUrl) {
+                const separator = baseUrl.includes('?') ? '&' : '?';
+                return `${baseUrl}${separator}_=${Date.now()}`;
+            }
+
+            function startRadioPlayback() {
+                clearTimeout(reconnectTimer);
+                stopDemoSynth();
+
+                const baseUrl = getConfiguredStreamUrl();
+                const liveUrl = buildLiveCacheBustedUrl(baseUrl);
+
+                setUIState(true, `CONECTANDO CON ${siteConfig.stationName.toUpperCase()}...`);
+
+                radioAudio.removeAttribute('crossorigin');
+                radioAudio.preload = 'none';
+                radioAudio.volume = parseFloat(volumeSlider.value);
+                radioAudio.src = liveUrl;
+
+                const playPromise = radioAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            setUIState(true, `EN VIVO / ON AIR — ${siteConfig.stationName.toUpperCase()}`);
+                        })
+                        .catch((err) => {
+                            console.warn('Error en promesa audio.play():', err);
+                            if (!isPlaying) return;
+
+                            setUIState(false, 'EMISORA FUERA DEL AIRE O SIN CONEXIÓN');
+                            showMessage(
+                                'No se pudo iniciar el audio en vivo (la emisora puede estar fuera del aire o bloqueada por la red). Intenta de nuevo o prueba "Audio Demo" en Personalizar Web > Señal.',
+                                'error',
+                                6000
+                            );
+                        });
+                }
+            }
+
+            function pauseRadioPlayback() {
+                clearTimeout(reconnectTimer);
+                radioAudio.pause();
+                stopDemoSynth();
+                setUIState(false, 'PAUSADO');
+            }
+
+            function stopRadioPlayback() {
+                clearTimeout(reconnectTimer);
+                radioAudio.pause();
+                radioAudio.src = '';
+                radioAudio.removeAttribute('src');
+                radioAudio.load();
+                stopDemoSynth();
+                setUIState(false, 'DETENIDO — LISTO');
+            }
+
+            playPauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    pauseRadioPlayback();
+                } else {
+                    startRadioPlayback();
+                }
+            });
+
+            stopBtn.addEventListener('click', () => {
+                stopRadioPlayback();
+            });
+
+            applyStreamAdminBtn.addEventListener('click', () => {
+                siteConfig.streamUrl = cfgStreamUrl.value.trim() || DEFAULT_CONFIG.streamUrl;
+                saveConfig();
+                stopRadioPlayback();
+                startRadioPlayback();
+            });
+
+            demoSynthAdminBtn.addEventListener('click', () => {
+                clearTimeout(reconnectTimer);
+                radioAudio.pause();
+                radioAudio.src = '';
+                radioAudio.removeAttribute('src');
+                startDemoSynth();
+                setUIState(true, `EN VIVO — ${siteConfig.stationName.toUpperCase()} (AUDIO DEMO)`);
+                showMessage('Reproduciendo audio analógico de demostración.', 'info', 3500);
+            });
+
+            // Eventos nativos del elemento <audio> y reconexión automática
+            radioAudio.addEventListener('playing', () => {
+                clearTimeout(reconnectTimer);
+                setUIState(true, `EN VIVO / ON AIR — ${siteConfig.stationName.toUpperCase()}`);
+            });
+
+            radioAudio.addEventListener('waiting', () => {
+                if (isPlaying && !isDemoSynthActive) {
+                    statusText.textContent = 'CONECTANDO / ALMACENANDO BÚFER...';
+                }
+            });
+
+            radioAudio.addEventListener('stalled', () => {
+                if (isPlaying && !isDemoSynthActive) {
+                    statusText.textContent = 'SEÑAL DÉBIL — RECONECTANDO...';
+                    clearTimeout(reconnectTimer);
+                    reconnectTimer = setTimeout(() => {
+                        if (isPlaying && !isDemoSynthActive) startRadioPlayback();
+                    }, 3500);
+                }
+            });
+
+            radioAudio.addEventListener('error', () => {
+                if (!isPlaying || isDemoSynthActive || !radioAudio.getAttribute('src')) return;
+                setUIState(false, 'EMISORA FUERA DEL AIRE');
+                showMessage(
+                    'La transmisión en vivo está fuera del aire en este momento o no responde.',
+                    'error',
+                    5500
+                );
+            });
+
+            // Control de Volumen y Silencio
+            volumeSlider.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value);
+                radioAudio.volume = val;
+                radioAudio.muted = (val === 0);
+                volumeLabel.textContent = `${Math.round(val * 100)}%`;
+
+                if (demoMasterGain) {
+                    demoMasterGain.gain.value = val * 0.22;
+                }
+                updateMuteIcons();
+            });
+
+            muteBtn.addEventListener('click', () => {
+                radioAudio.muted = !radioAudio.muted;
+                if (demoMasterGain) {
+                    demoMasterGain.gain.value = radioAudio.muted ? 0 : parseFloat(volumeSlider.value) * 0.22;
+                }
+                updateMuteIcons();
+            });
+
+            function updateMuteIcons() {
+                if (radioAudio.muted || parseFloat(volumeSlider.value) === 0) {
+                    volIconHigh.classList.add('hidden');
+                    volIconMute.classList.remove('hidden');
+                } else {
+                    volIconHigh.classList.remove('hidden');
+                    volIconMute.classList.add('hidden');
+                }
+            }
+
+            // Inicializar sitio completo y máquina de escribir
+            renderAllSiteData(true);
+        });
+    </script>
+</body>
+</html>
